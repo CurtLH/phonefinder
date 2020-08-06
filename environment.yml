@@ -1,0 +1,41 @@
+{%- import '.github/ght/macros/selected.j2' as selected -%}
+{%- call(cli) selected.first(ght.command_line_interface) %}
+name: {{ cookiecutter.project_repo }}-dev
+channels:
+  - {{ cookiecutter.anaconda_organization }}
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pip:
+    - -e .
+
+  # Setup Requirements (setup.py:setup_requirements)
+  - setuptools_scm
+  - setuptools_scm_git_archive
+  - wheel
+
+  # Install Requirements (setup.py:requirements)
+  - click >=7.0
+  - click-plugins
+  - entrypoints
+
+  # Test Requirements (setup.py:test_requirements)
+  - pytest >=3
+  - pytest-cov
+
+  # Documentation Requirements (setup.py:doc_requirements)
+  - sphinx
+{%- if cli|lower == 'click' %}
+  - sphinx-click
+{%- endif %}
+  - watchdog
+
+  # Dev Workflow requirements
+  - pre-commit
+  - black
+  - flake8
+  - keyring
+  - twine
+{%- endcall %}

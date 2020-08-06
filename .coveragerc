@@ -1,0 +1,16 @@
+[run]
+branch = true
+source =
+    {{ cookiecutter.project_namespace }}.{{ cookiecutter.project_slug }}
+
+[paths]
+source =
+    src
+    **/site-packages
+
+[report]
+omit =
+    setup.py
+    src/{{ cookiecutter.project_namespace }}/{{ cookiecutter.project_slug }}/__main__.py
+    src/{{ cookiecutter.project_namespace }}/{{ cookiecutter.project_slug }}/_version.py
+    tests/*
